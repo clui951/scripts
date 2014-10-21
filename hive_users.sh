@@ -3,8 +3,8 @@
 printf "\n"
 
 for serv_numb in {1..28} ; do
-	if [ "$serv_numb" == "25" ]; then
-		echo "hive 25 is not meant to be connected. access denied by default"
+	if [ "$serv_numb" == "6" -o "$serv_numb" == "7" -o "$serv_numb" == "9" -o "$serv_numb" == "14" -o "$serv_numb" == "17" -o "$serv_numb" == "20" -o "$serv_numb" == "23" -o "$serv_numb" == "25" ]; then
+		echo "hive $serv_numb is not meant to be connected. access denied by default"
 		continue
 	fi
 
@@ -17,5 +17,6 @@ for serv_numb in {1..28} ; do
 	fi
 done
 
+printf "\n"
 
-# 6 7 9 14 17 20 23
+# 6 7 9 14 17 20 23 25
