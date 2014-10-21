@@ -1,3 +1,5 @@
+# Iterates through all hive machine servers and prints out the number of users on each machine.
+
 printf "\n"
 
 for serv_numb in {1..28} ; do
