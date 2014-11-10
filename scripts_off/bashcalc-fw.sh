@@ -88,9 +88,19 @@ function float_lt {
 	LEN1=${#1}
 	LEN2=${#2}
 	if [ $LEN1 -lt $LEN2 ]; then
-		echo "scale=$LEN2; $1 < $2" | bc -l
+		if [ $(echo "scale=$LEN2; $1 < $2" | bc -l) = "1" ]; then
+			# echo "chill"
+			return 0
+		else
+			return 1
+		fi
 	else
-		echo "scale=$LEN1; $1 < $2" | bc -l
+		if [ $(echo "scale=$LEN1; $1 < $2" | bc -l) = "1" ]; then
+			# echo "chill"
+			return 0
+		else
+			return 1
+		fi
 	fi 
 }
 
@@ -110,8 +120,18 @@ function float_lte {
 	LEN1=${#1}
 	LEN2=${#2}
 	if [ $LEN1 -lt $LEN2 ]; then
-		echo "scale=$LEN2; $1 <= $2" | bc -l
+		if [ $(echo "scale=$LEN2; $1 <= $2" | bc -l) = "1" ]; then
+			# echo "chill"
+			return 0
+		else
+			return 1
+		fi
 	else
-		echo "scale=$LEN1; $1 <= $2" | bc -l
+		if [ $(echo "scale=$LEN1; $1 <= $2" | bc -l) = "1" ]; then
+			# echo "chill"
+			return 0
+		else
+			return 1
+		fi
 	fi 
 }
