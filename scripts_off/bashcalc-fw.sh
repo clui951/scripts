@@ -60,13 +60,13 @@ function angle_reduce {
 	NUM=$1
 	if [ $(echo "scale=$LEN1; $1 >= 0" | bc -l) -eq 1 ]; then
 		# Positive; keep subtracting TWO_PI until in range
-		while [ $(float_lt "$TWO_PI" "$NUM") -eq 1 ] 
+		while float_lt "$TWO_PI" "$NUM"
 		do
 			NUM=$(echo "scale=$SCALE; $NUM - $TWO_PI" | bc -l)
 		done
 	else 	
 		# Negative; keep adding TWO_PI until in range
-		while [ $(float_lt "$NUM" "0") -eq 1 ] 
+		while float_lt "$NUM" "0" 
 		do
 			NUM=$(echo "scale=$SCALE; $NUM + $TWO_PI" | bc -l)
 		done
@@ -87,15 +87,16 @@ function float_lt {
 	# ADD CODE HERE FOR PART 3
 	LEN1=${#1}
 	LEN2=${#2}
+	LEN2=$(($LEN1 + $LEN2))
 	if [ $LEN1 -lt $LEN2 ]; then
-		if [ $(echo "scale=$LEN2; $1 < $2" | bc -l) = "1" ]; then
-			# echo "chill"
+		if [[ $(echo "scale=$LEN2; $1 < $2" | bc -l) = 1 ]]; then
+			# echo "swag"
 			return 0
 		else
 			return 1
 		fi
 	else
-		if [ $(echo "scale=$LEN1; $1 < $2" | bc -l) = "1" ]; then
+		if [[ $(echo "scale=$LEN2; $1 < $2" | bc -l) = 1 ]]; then
 			# echo "chill"
 			return 0
 		else
@@ -109,10 +110,20 @@ function float_eq {
 	LEN1=${#1}
 	LEN2=${#2}
 	if [ $LEN1 -lt $LEN2 ]; then
-		echo "scale=$LEN2; $1 == $2" | bc -l
+		if [ $(echo "scale=$LEN2; $1 == $2" | bc -l) = "1" ]; then
+			# echo "chill"
+			return 0
+		else
+			return 1
+		fi
 	else
-		echo "scale=$LEN1; $1 == $2" | bc -l
-	fi 
+		if [ $(echo "scale=$LEN1; $1 == $2" | bc -l) = "1" ]; then
+			# echo "chill"
+			return 0
+		else
+			return 1
+		fi
+	fi
 }
 
 function float_lte {
