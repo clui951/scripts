@@ -136,6 +136,7 @@ if [[ ${#} != 4 ]] ; then
 fi
 
 # Initial call to next_step
+max_step_const=$4
 temp_state=$(next_step $RUNNING 0 $1 $2 $3 $4)
 echo $temp_state
 
@@ -147,10 +148,10 @@ do
 	cat_angle_arg=$(echo $temp_state | cut -d " " -f3)
 	cat_radius_arg=$(echo $temp_state | cut -d " " -f4)
 	mouse_angle_arg=$(echo $temp_state | cut -d " " -f5)
-	max_step_arg=$(echo $temp_state | cut -d " " -f6)
+	# max_step_arg=$(echo $temp_state | cut -d " " -f6)
 
 	# make next call to function and echo
-	temp_state=$(next_step $state_arg $step_arg $cat_angle_arg $cat_radius_arg $mouse_angle_arg $max_step_arg)
+	temp_state=$(next_step $state_arg $step_arg $cat_angle_arg $cat_radius_arg $mouse_angle_arg $max_step_const)
 	echo $temp_state
 done
 
